@@ -2,7 +2,7 @@
   "expo": {
     "name": "Wheels24R-Sales",
     "slug": "Wheels24R-Sales",
-    "version": "1.0.0",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.venkat1283.Wheels24RSales"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b5dc0671-153e-4837-84d4-d18009b9f597"
+      }
     }
   }
 }
