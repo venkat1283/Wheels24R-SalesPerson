@@ -17,6 +17,18 @@ import DealerDetails from './src/Screens/DealerDetails'
 import { getData, storeData } from './src/Utilities/AsyncStorage_'
 import { URLS } from './src/Utilities/urls'
 import axios from 'axios'
+import OnboardDetails from './src/Screens/OnboardDealers'
+import OnboardDealers from './src/Screens/OnboardDealers'
+import OnboardDealerDetails from './src/Screens/OnboardDealerDetails'
+
+// export const resetNavigationToInitialScreen = () => {
+//     if (navigationRef.current) {
+//         navigationRef.current.reset({
+//             index: 0, // Index of the initial screen
+//             routes: [{ name: 'Login' }], // Name of the initial screen
+//         });
+//     }
+// };
 
 const Stack = createStackNavigator()
 const tab = createBottomTabNavigator()
@@ -226,7 +238,7 @@ const StackNavigator = () => {
             {resData == null ? ( // Show a loading indicator while waiting for the API call
                 <ActivityIndicator size="large" color="blue" />
             ) : <NavigationContainer ref={navigationRef}>
-                <Stack.Navigator initialRouteName={loginCheck == 1 ? 'Tabs' : loginCheck == 1 ? 'Login' : ''}>
+                <Stack.Navigator initialRouteName={loginCheck == 1 ? 'Tabs' : loginCheck == 0 ? 'Login' : ''}>
                     <Stack.Screen name="Login" component={LoginScreen} options={{
                         headerShown: false
                     }} />
@@ -246,6 +258,12 @@ const StackNavigator = () => {
                         headerShown: false
                     }} />
                     <Stack.Screen name="requestDlrDetails" component={DealerDetails} options={{
+                        headerShown: false
+                    }} />
+                    <Stack.Screen name="Onboard" component={OnboardDealers} options={{
+                        headerShown: false
+                    }} />
+                    <Stack.Screen name="onboardetail" component={OnboardDealerDetails} options={{
                         headerShown: false
                     }} />
                 </Stack.Navigator>

@@ -12,4 +12,5 @@ export const URLS = {
     RE_INITIATE: '/SalesPerson/saleperson_dealer_reinitiate_request',
     FILTER_REQUESTS: '/SalesPerson/saleperson_dealer_requests',
     SUBSCRIBE_DETAILS: '/SalesPerson/saleperson_dealer_subscription_details',
+    ONBOARD_DETAILS: '/SalesPerson/saleperson_all_dealer_details'
 }

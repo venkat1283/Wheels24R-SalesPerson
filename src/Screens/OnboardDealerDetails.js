@@ -7,7 +7,7 @@ import Request from '../Component/Request'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import BottomView from '../Component/BottomView'
 
-const DealerDetails = () => {
+const OnboardDealerDetails = () => {
     const route = useRoute()
     const navigation = useNavigation()
     const [requests, setRequests] = useState([{ "key": 0, 'id': '1234', 'dealer': 'Suresh', 'type': 'Sales', 'location': 'Hyderabad', 'phone': "+91 9776767676" }, { "key": 1, 'name': 'Trending Cars', 'contact': 'Madhav', 'exp': '5 Years', 'email': 'trendingcars@gmail.com', 'password': "*******" }, { "key": 2, 'id': '1236', 'dealer': 'Ramesh', 'type': 'Sales', 'location': 'Bangalore', 'phone': "+91 9787656568" }])
@@ -29,12 +29,18 @@ const DealerDetails = () => {
                         }}>
                             <Image source={Back} style={styles.logoImgStyle} />
                         </TouchableOpacity>
-                        <Text style={[GlobalStyles.headerTitle, { marginRight: 25 }]}>Request ID : {route.params.details.idd} </Text>
+                        <Text></Text>
                         <Text></Text>
                     </View>
                 </View>
             </View>
-            <Request request={route.params.details} showId={false} action={() => { }} />
+
+            <View style={styles.expView}>
+                <Text style={styles.expMsg}>{route.params.details.exp_message}</Text>
+            </View>
+            <Request request={route.params.details} showId={false} action={() => { }} type='onboarddetail' />
+
+            <Text style={styles.heading}>Business Details</Text>
             <Pressable style={GlobalStyles.mainView} onPress={() => {
 
             }}>
@@ -54,19 +60,50 @@ const DealerDetails = () => {
                     <View style={GlobalStyles.subView}>
                         <Text style={GlobalStyles.heads}>Password</Text>
                     </View>
+                    {route.params.onboard &&
+                        <View style={GlobalStyles.subView}>
+                            <Text style={GlobalStyles.heads}>Registered on</Text>
+                        </View>
+                    }
                 </View>
                 <View style={[GlobalStyles.secondView]}>
                     <Text style={GlobalStyles.heads}>: {route.params.details.business_name}</Text>
                     <Text style={GlobalStyles.heads}>: {route.params.details.contact_person}</Text>
                     <Text style={GlobalStyles.heads}>: {route.params.details.experiance}</Text>
-                    <Text style={GlobalStyles.heads}>: {route.params.details.email}</Text>
+                    <Text style={GlobalStyles.heads}>: {route.params.details.email_id}</Text>
                     <Text style={GlobalStyles.heads}>: {route.params.details.password}</Text>
+                    {route.params.onboard && <Text style={GlobalStyles.heads}>: {route.params.details.submit_date}</Text>}
                 </View>
             </Pressable>
+            <View>
+                <Text style={styles.heading}>Plan Details</Text>
+                <Pressable style={GlobalStyles.mainView} onPress={() => {
+
+                }}>
+                    <View style={GlobalStyles.firstView}>
+                        <View style={GlobalStyles.subView}>
+                            <Text style={GlobalStyles.heads}>Subscribed On</Text>
+                        </View>
+                        <View style={GlobalStyles.subView}>
+                            <Text style={GlobalStyles.heads}>Plan Name</Text>
+                        </View>
+                        <View style={GlobalStyles.subView}>
+                            <Text style={GlobalStyles.heads}>Expired On</Text>
+                        </View>
+                    </View>
+                    <View style={[GlobalStyles.secondView]}>
+                        <Text style={GlobalStyles.heads}>: {route.params.details.date_of_join}</Text>
+                        <Text style={GlobalStyles.heads}>: {route.params.details.plan_name}</Text>
+                        <Text style={GlobalStyles.heads}>: {route.params.details.plan_to_date}</Text>
+                    </View>
+                </Pressable>
+            </View>
+
+
         </SafeAreaView>
     )
 }
-export default DealerDetails
+export default OnboardDealerDetails
 // 
 const styles = StyleSheet.create({
     logoImgStyle: {
@@ -78,5 +115,26 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto-Medium',
         fontSize: 15
     },
+    heading: {
+        marginHorizontal: 16,
+        marginTop: 10,
+        fontFamily: 'Roboto-Medium',
+        fontSize: 15
+    },
+    expView: {
+        marginHorizontal: 16,
+        marginTop: 20,
+        height: 40,
+        backgroundColor: '#FFEDED',
+        borderRadius: 4,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    expMsg: {
+        textAlignVertical: 'center',
+        fontFamily: 'Roboto-Regular',
+        fontSize: 13,
+        color: '#E00000'
+    }
 
 })

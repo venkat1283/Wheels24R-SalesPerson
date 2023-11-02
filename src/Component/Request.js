@@ -1,9 +1,9 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { Dealer, DealerLocation, DealerPhone } from '../Images'
+import { Dealer, DealerLocation, DealerPhone, Reg } from '../Images'
 import { COLORS } from '../Utilities/COLORS'
 
-const Request = ({ request, action, showId = true }) => {
+const Request = ({ request, action, showId = true, type }) => {
     return (
         <Pressable style={styles.mainView} onPress={action}>
             <View style={styles.firstView}>
@@ -27,12 +27,22 @@ const Request = ({ request, action, showId = true }) => {
                     <Image source={DealerPhone} style={styles.dealerimg} />
                     <Text style={styles.heads}>Phone Number</Text>
                 </View>
+                {type == 'onboard' &&
+                    <View style={styles.subView}>
+                        <Image source={Reg} style={styles.dealerimg} />
+                        <Text style={styles.heads}>Registered on</Text>
+                    </View>
+                }
             </View>
-            <View style={showId ? [styles.secondView, { marginTop: 15 }] : styles.secondView}>
+            <View style={showId ? type == 'onboard' ? { flex: 2, marginTop: 18 } : [styles.secondView, { marginTop: 15 }] : styles.secondView}>
                 <Text style={styles.heads}>: {request.dealer_name}</Text>
-                <Text style={styles.heads}>: {request.dealer_inspection_type}</Text>
-                <Text style={styles.heads}>: {request.pincode}</Text>
-                <Text style={styles.heads}>: {request.mobile_no}</Text>
+                <Text style={styles.heads}>: {(type == 'onboard' || type == 'onboarddetail') ? request.dealer_type : request.dealer_inspection_type}</Text>
+                <Text style={styles.heads}>: {(type == 'onboard' || type == 'onboarddetail') ? request.location : request.pincode}</Text>
+                <Text style={styles.heads}>: {(type == 'onboard' || type == 'onboarddetail') ? request.mobile_number : request.mobile_no}</Text>
+                {type == 'onboard' && <View style={{ flexDirection: 'row' }}>
+                    <Text style={styles.heads}>: {request.plan_from_date}</Text>
+                    <Text style={styles.exp}>({request.exp_message})</Text>
+                </View>}
             </View>
         </Pressable>
     )
@@ -88,6 +98,14 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto-Regular',
         fontSize: 13,
         margin: 6
+    },
+    exp: {
+        color: 'red',
+        fontFamily: 'Roboto-Regular',
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        fontSize: 11,
+        marginLeft: -2
     },
     dealerimg: {
         width: 12,
